@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    
+    <h1>Calendário de apostas</h1>
+    <div>
+        <label for="inputNumero">Escolha um número entre 1 e 6</label>
+        <input type="text" id="inputNumero" maxlength="1" placeholder="Numero" 
+        onkeypress="if(event.key==='Enter') adicionarNumero()"></input>
+        
+
+    </div>
+    <div>
+        <label for="inputAposta">Escolha quanto quer apostar, mínimo 1</label>
+        <input type="text" id="inputAposta" maxlength="100" placeholder="Numero" 
+        onkeypress="if(event.key==='Enter') adicionarAposta()"></input>
+    </div> 
+    <div>
+        <button onclick="jogar()">Jogar</button>
+    </div>
+    <div id="saidaDado"></div>
+
+    <div id="imprimirAposta"></div>
+
+    <div id="resultadoAposta"></div>
+
+    <script src="../js/apostas.js"></script>
+</body>
+</html>
