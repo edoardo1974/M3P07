@@ -5,45 +5,58 @@ var numdado = 0;
 
 
 
-function dado() {
+function dado() {// Function to simulate a dice roll
     numdado = Math.floor(Math.random() * 6) + 1;
+    //numdado = 3;
     document.getElementById('saidaDado').textContent = 'O número do dado é: ' + numdado;
     return numdado;
 }
 
 
-
-function pecaNumero() {
-    const input = document.getElementById('inputNumero');
-    const numero = input.value;
-
-    input.value = '';
-    console.log("Número inserido:", numero);
-    return numero;
-}
-
-function pecaApostas() {
-    const input = document.getElementById('inputAposta');
-    const numero = input.value;
-
-    input.value = '';
-    console.log("Apostas inserida:", numero);
-    return numero;
+function pecaNumero() {// Function to get the number input from the user
+    if(dinero>0)
+        {
+        const input = document.getElementById('inputNumero');
+        numerointroduzido = input.value;
+        input.value = '';
+        console.log("Número inserido:", numerointroduzido);
+        return numerointroduzido;
+    } else {
+        alert("Você não tem dinheiro suficiente para jogar. Por favor, aposte novamente.");
+        return null;
+    }
 }
 
 
+function pecaApostas() {// Function to get the bet amount from the user
+    if(dinero>0)
+    {
+        const input = document.getElementById('inputAposta');
+        aposta = input.value;
+        input.value = '';
+        //console.log("Apostas inserida:", aposta);
+        return aposta;
+    } else {
+        alert("Você não tem dinheiro suficiente para jogar. Por favor, aposte novamente.");
+        return null;
+    }
+}
 
-function adicionarNumero() {
+
+function adicionarNumero() {// Function to add the number input
     numerointroduzido = pecaNumero();
-    if (!verificacaoNumero(numerointroduzido)) {
+    if (verificacaoNumero(numerointroduzido)) {
+        console.log("Número válido:", numerointroduzido);
         return Number(numerointroduzido);
     }
 }
 
-function adicionarAposta() {
+function adicionarAposta() {// Function to add the bet amount
     aposta = pecaApostas();
-    if (!verificacaoNumero(aposta)) {
+    if (verificacaoNumero(aposta)) {
+        console.log("Aposta válida:", aposta);
         return Number(aposta);
+        
     }
 }
 
@@ -57,41 +70,53 @@ function verificacaoNumero(numero)// Function to verify if the input is a letter
     return true;
 }
 
-function ganharojogo() {
-    if (dinero == 200) {
+function ganharojogo() {// Function to check if the player has won the game
+    if (dinero >= 200) {
         alert("Você ganhou! Seu novo saldo é: " + dinero);
     } 
 }
 
-function perderojogo() {
+function perderojogo() {// Function to check if the player has lost the game
     if (dinero == 0) {
         alert("Você perdeu! já não tem dinheiro. GAME OVER! ");
     } 
 }
 
-function ganharTurno() {
+function ganharTurno() {// Function to handle winning a turn
     dinero += 2*aposta;
-    document.getElementById('resultadoAposta').textContent = `Você apostou: ${aposta} e ganhou. O número sorteado foi: ${numdado}. Você escolheu o número: ${numerointroduzido}.`;
-
+    adicionarMensagem('Você apostou:' + aposta + ' e ganhou. O número sorteado foi:' + numdado + '. Você escolheu o número: ' + numerointroduzido + '.')
     ganharojogo();
 }
 
-function perderTurno() {
+function perderTurno() {// Function to handle losing a turn
     dinero -= aposta;
-    document.getElementById('resultadoAposta').textContent = `Você apostou: ${aposta} e perdeu. O número sorteado foi: ${numdado}. Você escolheu o número: ${numerointroduzido}.`;
+    console.log(aposta, dinero,numerointroduzido);
+    adicionarMensagem('Você apostou:' + aposta + ' e perdeu. O número sorteado foi:' + numdado + '. Você escolheu o número: ' + numerointroduzido + '.')
     perderojogo();
 }
 
-function jogar() {
-    const numero = dado();
-    const aposta = adicionarAposta();
-    const numeroIntroduzido = adicionarNumero();
-
-    if (numero === numeroIntroduzido) {
-        ganharTurno();
-    } else {
-        perderTurno();
-    }
+function adicionarMensagem(testo) {// Function to add a message to the result div
+    const div = document.getElementById('resultadoAposta');
+    const novoparágrafo = document.createElement('p');
+    novoparágrafo.textContent = testo;
+    div.appendChild(novoparágrafo);
 }
 
+function jogar() {// Function to handle the game logic
+    const numero = dado();
+        console.log("Aposta:", aposta);
+        console.log("Número introduzido:", numerointroduzido);
+
+        if (numero == numerointroduzido) {
+            ganharTurno();
+            adicionarMensagem("O seu saldo de pontos é: " + dinero);
+        } else {
+            perderTurno();
+            adicionarMensagem("O seu saldo de pontos é: " + dinero);
+        }
+        console.log("Saldo atual:", dinero);
+    
+    
+
+}
     

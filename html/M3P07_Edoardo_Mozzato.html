@@ -6,25 +6,47 @@
     <title>Document</title>
 </head>
 <body>
-    
-
-    
     <h1>Calendário de apostas</h1>
+    <p>Você tem 100 pontos para apostar. Escolha um número entre 1 e 6 e quanto quer apostar.</p>
+    <p>Se você acertar o número, ganhará o valor apostado dois vezes. Se errar, perderá o valor apostado.</p>
+    <p>Boa sorte!</p>
     <div>
+        <!--
+            This label is associated with an input element (with id="inputNumero").
+        -->
         <label for="inputNumero">Escolha um número entre 1 e 6</label>
+        <!-- 
+            Input field for entering a single digit number.
+            - onkeypress="if(event.key==='Enter') adicionarNumero()": Calls the adicionarNumero()
+             function when the Enter key is pressed.
+        -->
         <input type="text" id="inputNumero" maxlength="1" placeholder="Numero" 
         onkeypress="if(event.key==='Enter') adicionarNumero()"></input>
-        
-
     </div>
     <div>
+        <!--
+            This label is associated with the input field "inputAposta".
+        -->
         <label for="inputAposta">Escolha quanto quer apostar, mínimo 1</label>
+        <!-- 
+            Input field for entering a number as a bet.
+            - id="inputAposta": Used to uniquely identify the input element.
+            - onkeypress="if(event.key==='Enter') adicionarAposta()": Calls the adicionarAposta() 
+            function when the Enter key is pressed.
+        -->
         <input type="text" id="inputAposta" maxlength="100" placeholder="Numero" 
         onkeypress="if(event.key==='Enter') adicionarAposta()"></input>
     </div> 
     <div>
+        <!-- 
+            This button element triggers the 'jogar' function when clicked.
+        -->
         <button onclick="jogar()">Jogar</button>
     </div>
+    <!-- 
+        This <div> element with the id "saidaDado" serves as a container for displaying output data dynamically on the web page.
+        It can be targeted and updated via JavaScript to show results, messages, or any other information to the user.
+    -->
     <div id="saidaDado"></div>
 
     <div id="imprimirAposta"></div>
